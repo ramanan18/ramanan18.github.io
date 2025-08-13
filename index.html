@@ -9,143 +9,123 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* Text & surfaces */
-      --fg:#0f172a; --muted:#475569; --bg:#0b1020; --card:#0f172a;
-      /* Accent + gradient stops (editable via JS) */
-      --accent:#6366f1;
-      --g1:#0ea5e9; --g2:#6366f1; --g3:#8b5cf6; --g4:#06b6d4;
-      --glow: 0 10px 30px rgba(99,102,241,.35);
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --fg:#0f172a; --muted:#475569; --bg:#f8fafc; --card:#ffffff; --glow: 0 10px 30px rgba(99,102,241,.25) }
+      /* Dark-first palette */
+      --bg:#0b1020;        /* deep navy */
+      --surface:#0f172a;   /* card bg */
+      --text:#e2e8f0;      /* light text */
+      --muted:#94a3b8;     /* subdued text */
+      --accent:#7c3aed;    /* neon purple */
+      --edge:#a78bfa;      /* glow edge */
+      --g1:#1d4ed8; --g2:#7c3aed; --g3:#06b6d4; --g4:#22d3ee; /* background gradient stops */
+      --ring: 0 0 0 2px #ffffff1a inset, 0 1px 3px rgba(0,0,0,.5);
+      --glow: 0 10px 30px rgba(124,58,237,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); overflow-x:hidden; }
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text); background:var(--bg); overflow-x:hidden;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
 
-    /* Animated gradient background (uses CSS vars) */
+    /* Animated background */
     .bg-anim{
       position:fixed; inset:0; z-index:-3; filter:saturate(120%);
       background:
-        radial-gradient(1200px 600px at 10% -10%, #a78bfa55, transparent 60%),
-        radial-gradient(1000px 700px at 110% 10%, #22d3ee44, transparent 60%),
-        radial-gradient(900px 600px at 50% 110%, #f472b655, transparent 60%),
-        linear-gradient(120deg,var(--g1) 0%, var(--g2) 40%, var(--g3) 70%, var(--g4) 100%);
+        radial-gradient(1000px 600px at 5% -10%, #7c3aed33, transparent 60%),
+        radial-gradient(900px 600px at 105% 10%, #06b6d433, transparent 60%),
+        radial-gradient(900px 600px at 50% 110%, #22d3ee33, transparent 60%),
+        linear-gradient(120deg,var(--g1) 0%, var(--g2) 35%, var(--g3) 70%, var(--g4) 100%);
       background-size: 200% 200%;
-      animation: pan 24s ease-in-out infinite alternate;
+      animation: pan 26s ease-in-out infinite alternate;
     }
     @keyframes pan{ from{background-position:0% 0%} to{background-position:100% 100%} }
 
-    /* Floating glassy blobs */
+    /* Soft glow blobs */
     .blob{
-      position:fixed; border-radius:50%; filter:blur(40px); opacity:.35; z-index:-2;
+      position:fixed; border-radius:50%; filter:blur(48px); opacity:.35; z-index:-2;
       background:conic-gradient(from 0deg, #fff0, #fff3 40%, #fff0 70%);
-      mix-blend-mode: soft-light;
-      animation: float 18s ease-in-out infinite;
+      mix-blend-mode:soft-light; animation: float 18s ease-in-out infinite;
     }
-    .blob.b1{width:380px; height:380px; left:-80px; top:120px; animation-delay:-2s}
-    .blob.b2{width:320px; height:320px; right:-60px; top:220px; animation-delay:1s}
-    .blob.b3{width:420px; height:420px; left:40%; bottom:-120px; animation-delay:4s}
-    @keyframes float{
-      0%,100%{ transform: translateY(0) translateX(0) scale(1);}
-      50%{ transform: translateY(-30px) translateX(10px) scale(1.05);}
-    }
+    .blob.b1{width:380px;height:380px;left:-80px;top:120px;animation-delay:-2s}
+    .blob.b2{width:320px;height:320px;right:-60px;top:220px;animation-delay:1s}
+    .blob.b3{width:420px;height:420px;left:40%;bottom:-120px;animation-delay:4s}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(-30px) translateX(10px) scale(1.05)}}
 
+    /* Layout */
     header{
       max-width:1100px; margin:0 auto; padding:72px 20px 24px;
       display:flex; align-items:center; gap:24px; justify-content:space-between;
     }
-    .brand{display:flex; align-items:center; gap:18px}
-    .avatar{
-      width:72px;height:72px;border-radius:50%;
-      box-shadow:0 6px 20px rgba(0,0,0,.2); object-fit:cover; background:#fff;
-    }
-    .title h1{margin:0; font-size:clamp(28px,4vw,40px); letter-spacing:.2px}
-    .title p{margin:6px 0 0; color:var(--muted)}
-    .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .btn{
-      appearance:none; border:1px solid #ffffff40; background:#ffffff14; color:#fff;
-      padding:10px 14px; border-radius:10px; cursor:pointer; backdrop-filter: blur(8px);
-      box-shadow: var(--glow); font-weight:600; transition: transform .15s ease, opacity .2s;
-    }
-    .btn:hover{ transform: translateY(-1px); opacity:.95 }
-
-    /* Palette swatches */
-    .palette{display:flex; gap:8px; align-items:center}
-    .swatch{
-      width:26px; height:26px; border-radius:50%; border:2px solid #ffffff90; cursor:pointer;
-      box-shadow: 0 6px 16px rgba(0,0,0,.25);
-    }
-    .swatch.indigo{ background:linear-gradient(135deg,#0ea5e9,#6366f1) }
-    .swatch.emerald{ background:linear-gradient(135deg,#10b981,#06b6d4) }
-    .swatch.amber{ background:linear-gradient(135deg,#f59e0b,#ec4899) }
-    .swatch.slate{ background:linear-gradient(135deg,#64748b,#60a5fa) }
-
-    main{ max-width:1100px; margin:0 auto; padding:10px 20px 80px;}
-
-    /* Hero card */
-    .hero{
-      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.65));
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,.5);
-      border-radius:20px; padding:28px; box-shadow: var(--glow);
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; align-items:center;
-    }
-    @media (max-width:900px){ .hero{ grid-template-columns:1fr } }
-    .kicker{color:#ffffff; font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
-    .hero h2{margin:.3em 0; font-size:clamp(28px,4vw,42px); color:#fff}
-    .type{font-weight:700; color:#fff}
-    .hero p{margin:.5em 0 1em; color:#eef2ff}
-    .hero a.cta{
-      display:inline-block; background:#fff; color:#0f172a; padding:12px 16px; border-radius:12px;
-      font-weight:700; text-decoration:none; box-shadow: var(--glow);
-    }
-    .hero .stat{ display:flex; gap:16px; align-items:center; color:#fff; margin-top:10px; opacity:.95 }
-
-    /* Sections */
+    main{ max-width:1100px; margin:0 auto; padding:10px 20px 80px; }
     section{ margin-top:48px }
     h3{ margin:0 0 16px; font-size:clamp(20px,2.6vw,28px) }
 
-    /* Cards */
-    .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
-    .col-6{ grid-column: span 6 }
-    .col-4{ grid-column: span 4 }
-    .col-12{ grid-column: span 12 }
-    @media (max-width:900px){ .col-6,.col-4{ grid-column: span 12 } }
-
-    .card{
-      background:var(--card); border:1px solid #ffffff30;
-      border-radius:16px; padding:18px;
-      box-shadow: 0 8px 24px rgba(2,6,23,.15);
-      transition: transform .2s ease, box-shadow .2s ease;
-      will-change: transform;
+    /* Brand */
+    .brand{display:flex; align-items:center; gap:18px}
+    .avatar{
+      width:76px;height:76px;border-radius:50%; object-fit:cover; background:#111827;
+      box-shadow: var(--ring), 0 6px 20px rgba(0,0,0,.4);
+      border:1px solid #ffffff22;
     }
-    .card:hover{ transform: translateY(-4px) scale(1.01); box-shadow:0 16px 40px rgba(2,6,23,.22) }
-    .card h4{ margin:0 0 8px; font-size:18px }
-    .card p{ margin:0 0 10px; color:var(--muted) }
-    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px }
-    .tag{ font-size:12px; padding:6px 10px; background:#00000008; border-radius:999px; border:1px solid #00000015 }
+    .title h1{margin:0; font-size:clamp(28px,4vw,40px); letter-spacing:.2px}
+    .title p{margin:6px 0 0; color:var(--muted)}
 
-    .links{display:flex; gap:10px; margin-top:10px}
-    .link{ color:#fff; text-decoration:none; font-weight:700; background: linear-gradient(90deg,var(--g2),var(--g1));
-      padding:8px 12px; border-radius:10px; box-shadow: var(--glow) }
-    .link.ghost{ background:#ffffff12; color:#fff; border:1px solid #ffffff44 }
+    /* Controls */
+    .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .btn{
+      appearance:none; border:1px solid #ffffff25; background:#ffffff12; color:#fff;
+      padding:10px 14px; border-radius:12px; cursor:pointer; backdrop-filter: blur(8px);
+      box-shadow:var(--glow); font-weight:700; transition: transform .15s ease, opacity .2s, border-color .2s;
+    }
+    .btn:hover{ transform: translateY(-1px); opacity:.95; border-color:#ffffff40 }
+    .palette{display:flex; gap:8px; align-items:center}
+    .swatch{
+      width:26px;height:26px;border-radius:50%;border:2px solid #ffffff90;cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,.35)
+    }
+    .swatch.purple{background:linear-gradient(135deg,#1d4ed8,#7c3aed)}
+    .swatch.teal{background:linear-gradient(135deg,#10b981,#06b6d4)}
+    .swatch.rose{background:linear-gradient(135deg,#f43f5e,#eab308)}
 
-    /* footer styles kept (no footer rendered) */
-    footer{ margin-top:48px; color:#cbd5e1; font-size:14px; text-align:center }
+    /* Cards */
+    .card{
+      background:linear-gradient(180deg, #0f172acc, #0f172ab0);
+      backdrop-filter: blur(10px);
+      border:1px solid #ffffff1f; border-radius:18px; padding:20px;
+      box-shadow: 0 8px 24px rgba(2,6,23,.45), 0 0 0 1px #ffffff10 inset;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow:0 16px 44px rgba(2,6,23,.55), 0 0 0 1px #ffffff15 inset }
 
-    /* Reveal on scroll */
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center;
+      border-radius:22px; padding:26px; border:1px solid #ffffff24; background:linear-gradient(180deg,#0b1228d0,#0b122880);
+      box-shadow:var(--glow);
+    }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr } }
+    .kicker{color:#c7d2fe; font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+    .hero h2{margin:.3em 0; font-size:clamp(28px,4vw,42px); color:#eef2ff}
+    .type{font-weight:800; color:#a78bfa}
+    .hero p{margin:.6em 0 1em; color:#cbd5e1}
+    .cta{
+      display:inline-block; background:linear-gradient(90deg,var(--edge),var(--accent));
+      color:#0b1020; padding:12px 16px; border-radius:12px; font-weight:800; text-decoration:none;
+      box-shadow:0 6px 30px rgba(124,58,237,.45);
+    }
+    .stat{ display:flex; gap:10px; align-items:center; color:#cbd5e1; margin-top:10px }
+
+    /* Reveal */
     .reveal{ opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease }
     .reveal.visible{ opacity:1; transform:none }
 
-    /* Dark-mode switch styles */
-    .switch{ display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700 }
-    .toggle{ width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80; }
-    .knob{ position:absolute; top:2px; left:2px; width:22px; height:22px; background:#fff; border-radius:50%; transition:left .2s }
-    .toggle.on .knob{ left:20px }
+    /* Links */
+    a{ color:var(--edge); text-decoration:none }
+    a:hover{ text-decoration:underline }
 
-    /* Link color binds to accent */
-    a{ color:var(--accent) }
+    /* Focus outline */
+    :focus-visible{ outline:2px solid var(--edge); outline-offset:3px }
   </style>
 </head>
 <body>
@@ -156,7 +136,6 @@
 
   <header>
     <div class="brand">
-      <!-- Use your own headshot at /profile.jpg; falls back if missing -->
       <img class="avatar" src="profile.jpg" alt="Portrait of Ramanan Sivalingam"
            onerror="this.onerror=null; this.src='https://avatars.githubusercontent.com/u/9919?v=4'">
       <div class="title">
@@ -167,20 +146,11 @@
 
     <div class="controls">
       <a class="btn" href="mailto:sivaramanan@gmail.com">Contact</a>
-
-      <!-- Color palette picker -->
-      <div class="palette" title="Color theme">
-        <button class="swatch indigo" data-p="indigo" aria-label="Indigo/Cyan"></button>
-        <button class="swatch emerald" data-p="emerald" aria-label="Emerald/Teal"></button>
-        <button class="swatch amber" data-p="amber" aria-label="Amber/Rose"></button>
-        <button class="swatch slate" data-p="slate" aria-label="Slate/Blue"></button>
+      <div class="palette" title="Change accent">
+        <button class="swatch purple" data-p="purple" aria-label="Purple/Indigo"></button>
+        <button class="swatch teal" data-p="teal" aria-label="Teal/Emerald"></button>
+        <button class="swatch rose" data-p="rose" aria-label="Rose/Amber"></button>
       </div>
-
-      <!-- Dark mode toggle -->
-      <label class="switch" title="Toggle dark mode">
-        <span>Theme</span>
-        <div class="toggle" id="themeToggle"><div class="knob"></div></div>
-      </label>
     </div>
   </header>
 
@@ -191,10 +161,10 @@
         <h2>Automation & Cloud Ops with <span class="type" id="type"></span></h2>
         <p>I build lean tools that turn logs into answers: ARG cost snapshots, Citrix usage analytics, and ESXi power controls—with clean web views and alerts.</p>
         <a class="cta" href="#contact">Contact Me ↓</a>
-        <div class="stat">⚡ <strong style="margin-left:6px">Fast to deploy:</strong>&nbsp; drop-in scripts, portable GUIs, and zero-friction setups.</div>
+        <div class="stat">⚡ <strong>Fast to deploy:</strong>&nbsp; drop-in scripts, portable GUIs, and zero-friction setups.</div>
       </div>
 
-      <div class="card" style="background:#0f172a; color:#e2e8f0; border-color:#ffffff22">
+      <div class="card">
         <h4 style="margin:0 0 8px">What I’m great at</h4>
         <ul style="margin:0 0 10px 18px; padding:0; line-height:1.8">
           <li>Azure Resource Graph reporting (cost, inventory)</li>
@@ -202,13 +172,9 @@
           <li>PowerShell → HTML dashboards & CSV pipelines</li>
           <li>VMware/ESXi shutdown & reboot tooling (PS + Python)</li>
         </ul>
-        <div class="tags">
-          <span class="tag">Azure</span><span class="tag">Citrix</span><span class="tag">VMware</span><span class="tag">PowerShell</span><span class="tag">Python</span>
-        </div>
       </div>
     </section>
 
-    <!-- About -->
     <section class="reveal">
       <h3>About</h3>
       <div class="card">
@@ -217,7 +183,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="reveal">
       <h3>Contact</h3>
       <div class="card">
@@ -242,42 +207,27 @@
       setTimeout(type, deleting ? 70 : 110);
     })();
 
-    // Scroll reveal
-    const observer = ('IntersectionObserver' in window) ? new IntersectionObserver(entries=>{
-      for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } }
+    // Reveal on scroll
+    const io = ('IntersectionObserver' in window) ? new IntersectionObserver(es=>{
+      for(const e of es){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }
     },{threshold:.1}) : null;
-    document.querySelectorAll('.reveal').forEach(n=>{ if(observer) observer.observe(n); else n.classList.add('visible'); });
+    document.querySelectorAll('.reveal').forEach(n=> io ? io.observe(n) : n.classList.add('visible'));
 
-    // Dark mode toggle (persist)
-    const toggle = document.getElementById('themeToggle');
-    function applyTheme(theme){
-      if(theme==='dark'){ document.documentElement.style.colorScheme='dark'; toggle.classList.add('on'); }
-      else if(theme==='light'){ document.documentElement.style.colorScheme='light'; toggle.classList.remove('on'); }
-      else { document.documentElement.style.colorScheme='normal'; toggle.classList.remove('on'); }
-      localStorage.setItem('theme', theme || '');
-    }
-    const savedTheme = localStorage.getItem('theme'); if(savedTheme) applyTheme(savedTheme);
-    toggle.addEventListener('click', ()=>{
-      const curr = localStorage.getItem('theme');
-      applyTheme(curr==='dark' ? 'light' : 'dark');
-    });
-
-    // Color palettes (persist)
+    // Accent palette (persist)
     const palettes = {
-      indigo:{ g1:'#0ea5e9', g2:'#6366f1', g3:'#8b5cf6', g4:'#06b6d4', accent:'#6366f1' },
-      emerald:{ g1:'#10b981', g2:'#06b6d4', g3:'#34d399', g4:'#0ea5e9', accent:'#10b981' },
-      amber:{ g1:'#f59e0b', g2:'#ec4899', g3:'#f472b6', g4:'#fb7185', accent:'#f59e0b' },
-      slate:{ g1:'#64748b', g2:'#60a5fa', g3:'#38bdf8', g4:'#94a3b8', accent:'#60a5fa' }
+      purple:{ g1:'#1d4ed8', g2:'#7c3aed', g3:'#06b6d4', g4:'#22d3ee', accent:'#7c3aed', edge:'#a78bfa' },
+      teal:{   g1:'#0ea5e9', g2:'#06b6d4', g3:'#10b981', g4:'#22d3ee', accent:'#06b6d4', edge:'#67e8f9' },
+      rose:{   g1:'#f43f5e', g2:'#eab308', g3:'#fb7185', g4:'#f472b6', accent:'#f43f5e', edge:'#fda4af' }
     };
     function applyPalette(name){
-      const p = palettes[name]; if(!p) return;
+      const p = palettes[name] || palettes.purple;
       const r = document.documentElement.style;
       r.setProperty('--g1', p.g1); r.setProperty('--g2', p.g2); r.setProperty('--g3', p.g3); r.setProperty('--g4', p.g4);
-      r.setProperty('--accent', p.accent);
+      r.setProperty('--accent', p.accent); r.setProperty('--edge', p.edge);
       localStorage.setItem('palette', name);
     }
-    const saved = localStorage.getItem('palette'); applyPalette(saved || 'indigo');
-    document.querySelectorAll('.swatch').forEach(s=> s.addEventListener('click', ()=> applyPalette(s.dataset.p)));
+    const saved = localStorage.getItem('palette'); applyPalette(saved || 'purple');
+    document.querySelectorAll('.swatch').forEach(s => s.addEventListener('click', () => applyPalette(s.dataset.p)));
   </script>
 </body>
 </html>
