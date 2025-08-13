@@ -64,6 +64,7 @@
 
     main{ max-width:1100px; margin:0 auto; padding:10px 20px 80px;}
 
+    /* Hero card */
     .hero{
       background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.65));
       backdrop-filter: blur(10px);
@@ -112,9 +113,11 @@
     /* footer styles can stay; no footer is rendered */
     footer{ margin-top:48px; color:#cbd5e1; font-size:14px; text-align:center }
 
+    /* Reveal on scroll */
     .reveal{ opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease }
     .reveal.visible{ opacity:1; transform:none }
 
+    /* Dark-mode switch styles */
     .switch{ display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700 }
     .toggle{ width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80; }
     .knob{ position:absolute; top:2px; left:2px; width:22px; height:22px; background:#fff; border-radius:50%; transition:left .2s }
@@ -134,12 +137,11 @@
       <img class="avatar" src="https://avatars.githubusercontent.com/u/1?v=4" alt="Avatar"
            onerror="this.src='https://avatars.githubusercontent.com/u/9919?v=4'">
       <div class="title">
-        <h1>Ramanan Siva</h1>
+        <h1>Ramanan Sivalingam</h1>
         <p>Systems Engineer — Azure • Citrix • VMware • PowerShell</p>
       </div>
     </div>
     <div class="controls">
-      <!-- Updated to your email -->
       <a class="btn" href="mailto:sivaramanan@gmail.com">Contact</a>
       <label class="switch" title="Toggle dark mode">
         <span>Theme</span>
@@ -184,8 +186,10 @@
     <section id="contact" class="reveal">
       <h3>Contact</h3>
       <div class="card">
-        <!-- GitHub link removed; LinkedIn + email kept -->
-        <p>Email: <a href="mailto:sivaramanan@gmail.com">sivaramanan@gmail.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/sivaramanan-sivalingam-85031b241/">sivaramanan-sivalingam-85031b241</a></p>
+        <p>
+          Email: <a href="mailto:sivaramanan@gmail.com">sivaramanan@gmail.com</a> ·
+          LinkedIn: <a href="https://www.linkedin.com/in/sivaramanan-sivalingam-85031b241/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
       </div>
     </section>
   </main>
