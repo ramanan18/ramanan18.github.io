@@ -9,25 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --fg:#0f172a;        /* slate-900 */
-      --muted:#475569;     /* slate-600 */
-      --bg:#f8fafc;        /* slate-50 */
-      --card:#ffffff;
-      --accent:#6366f1;    /* indigo-500 */
-      --glow: 0 10px 30px rgba(99,102,241,.25);
+      --fg:#0f172a; --muted:#475569; --bg:#f8fafc; --card:#ffffff;
+      --accent:#6366f1; --glow: 0 10px 30px rgba(99,102,241,.25);
     }
     @media (prefers-color-scheme: dark){
-      :root{
-        --fg:#e2e8f0; --muted:#94a3b8; --bg:#0b1020; --card:#0f172a;
-        --glow: 0 10px 30px rgba(99,102,241,.35);
-      }
+      :root{ --fg:#e2e8f0; --muted:#94a3b8; --bg:#0b1020; --card:#0f172a; --glow: 0 10px 30px rgba(99,102,241,.35) }
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--fg); background:var(--bg); overflow-x:hidden;
-    }
+    body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); overflow-x:hidden; }
 
     /* Animated gradient background */
     .bg-anim{
@@ -61,11 +51,7 @@
       display:flex; align-items:center; gap:24px; justify-content:space-between;
     }
     .brand{display:flex; align-items:center; gap:18px}
-    .avatar{
-      width:72px;height:72px;border-radius:50%;
-      box-shadow:0 6px 20px rgba(0,0,0,.2); object-fit:cover;
-      background:#fff;
-    }
+    .avatar{ width:72px;height:72px;border-radius:50%; box-shadow:0 6px 20px rgba(0,0,0,.2); object-fit:cover; background:#fff; }
     .title h1{margin:0; font-size:clamp(28px,4vw,40px); letter-spacing:.2px}
     .title p{margin:6px 0 0; color:var(--muted)}
     .controls{display:flex; gap:10px; align-items:center}
@@ -95,19 +81,14 @@
       display:inline-block; background:#fff; color:#0f172a; padding:12px 16px; border-radius:12px;
       font-weight:700; text-decoration:none; box-shadow: var(--glow);
     }
-    .hero .stat{
-      display:flex; gap:16px; align-items:center; color:#fff; margin-top:10px; opacity:.95
-    }
+    .hero .stat{ display:flex; gap:16px; align-items:center; color:#fff; margin-top:10px; opacity:.95 }
 
     /* Sections */
     section{ margin-top:48px }
     h3{ margin:0 0 16px; font-size:clamp(20px,2.6vw,28px) }
 
     /* Cards */
-    .grid{
-      display:grid; gap:16px;
-      grid-template-columns: repeat(12, 1fr);
-    }
+    .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
     .col-6{ grid-column: span 6 }
     .col-4{ grid-column: span 4 }
     .col-12{ grid-column: span 12 }
@@ -131,26 +112,18 @@
       padding:8px 12px; border-radius:10px; box-shadow: var(--glow) }
     .link.ghost{ background:#ffffff12; color:#fff; border:1px solid #ffffff44 }
 
-    footer{
-      margin-top:48px; color:#cbd5e1; font-size:14px;
-      text-align:center
-    }
+    footer{ margin-top:48px; color:#cbd5e1; font-size:14px; text-align:center }
 
     /* Reveal on scroll */
     .reveal{ opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease }
     .reveal.visible{ opacity:1; transform:none }
 
     /* Dark-mode switch styles */
-    .switch{
-      display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700
-    }
-    .toggle{
-      width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80;
-    }
+    .switch{ display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700 }
+    .toggle{ width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80; }
     .knob{ position:absolute; top:2px; left:2px; width:22px; height:22px; background:#fff; border-radius:50%; transition:left .2s }
     .toggle.on .knob{ left:20px }
 
-    /* Make sure links are legible on bright bg */
     a{ color:var(--accent) }
   </style>
 </head>
@@ -184,7 +157,8 @@
         <div class="kicker">Available for remote consulting</div>
         <h2>Automation & Cloud Ops with <span class="type" id="type"></span></h2>
         <p>I build lean tools that turn logs into answers: ARG cost snapshots, Citrix usage analytics, and ESXi power controls—with clean web views and alerts.</p>
-        <a class="cta" href="#projects">See Projects ↓</a>
+        <!-- Updated CTA -->
+        <a class="cta" href="#contact">Contact Me ↓</a>
         <div class="stat">⚡ <strong style="margin-left:6px">Fast to deploy:</strong>&nbsp; drop-in scripts, portable GUIs, and zero-friction setups.</div>
       </div>
       <div class="card" style="background:#0f172a; color:#e2e8f0; border-color:#ffffff22">
@@ -201,54 +175,7 @@
       </div>
     </section>
 
-    <section id="projects" class="reveal">
-      <h3>Projects</h3>
-      <div class="grid">
-        <article class="card col-6 tilt">
-          <h4>Citrix & Azure Tooling Suite</h4>
-          <p>Delivery Group usage reporting, last-24h activity/idle analysis, StoreFront tweaks, ARG cost snapshots, and CSV→HTML web views.</p>
-          <div class="tags">
-            <span class="tag">PowerShell</span><span class="tag">ARG</span><span class="tag">OData</span><span class="tag">Bootstrap</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://github.com/your-username/citrix-azure-tooling">Repo</a>
-            <a class="link ghost" href="#">Live Demo</a>
-          </div>
-        </article>
-
-        <article class="card col-6 tilt">
-          <h4>VMware/ESXi Power Tools</h4>
-          <p>GUI for VM/host shutdown & reboot (manual/scheduled), HTML emails; Python variant with packaging.</p>
-          <div class="tags">
-            <span class="tag">PowerCLI</span><span class="tag">WinForms/WPF</span><span class="tag">Python</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://github.com/your-username/esxi-power-tools">Repo</a>
-          </div>
-        </article>
-
-        <article class="card col-4 tilt">
-          <h4>Retail/Restaurant POS (HTML receipt)</h4>
-          <p>Touch-friendly dashboard, auto PDF/print, Twilio SMS, daily reports.</p>
-          <div class="tags"><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Twilio</span></div>
-          <div class="links"><a class="link" href="https://github.com/your-username/restaurant-pos">Repo</a></div>
-        </article>
-
-        <article class="card col-4 tilt">
-          <h4>SMS Marketing Portal</h4>
-          <p>Groups, templates, charts, CSV import/export.</p>
-          <div class="tags"><span class="tag">Node.js</span><span class="tag">Bootstrap</span></div>
-          <div class="links"><a class="link" href="https://github.com/your-username/sms-portal">Repo</a></div>
-        </article>
-
-        <article class="card col-4 tilt">
-          <h4>Prescription Refill Dashboard</h4>
-          <p>Weekly SMS reminders, reply capture, ready/pickup flow.</p>
-          <div class="tags"><span class="tag">Express</span><span class="tag">MongoDB</span></div>
-          <div class="links"><a class="link" href="https://github.com/your-username/refill-dashboard">Repo</a></div>
-        </article>
-      </div>
-    </section>
+    <!-- Removed the Projects section -->
 
     <section class="reveal">
       <h3>About</h3>
@@ -258,7 +185,7 @@
       </div>
     </section>
 
-    <section class="reveal">
+    <section id="contact" class="reveal">
       <h3>Contact</h3>
       <div class="card">
         <p>Email: <a href="mailto:you@example.com">you@example.com</a> · GitHub: <a href="https://github.com/your-username">your-username</a> · LinkedIn: <a href="https://www.linkedin.com/in/your-handle/">your-handle</a></p>
@@ -298,7 +225,7 @@
       if(observer) observer.observe(el); else el.classList.add('visible');
     });
 
-    // Tilt effect on cards
+    // Tilt effect (safe even if no .tilt elements)
     document.querySelectorAll('.tilt').forEach(card=>{
       let rAF = null;
       function onMove(e){
