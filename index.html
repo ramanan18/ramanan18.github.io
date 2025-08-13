@@ -19,7 +19,6 @@
     html,body{height:100%}
     body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); overflow-x:hidden; }
 
-    /* Animated gradient background */
     .bg-anim{
       position:fixed; inset:0; z-index:-3; filter:saturate(120%);
       background: radial-gradient(1200px 600px at 10% -10%, #a78bfa55, transparent 60%),
@@ -31,7 +30,6 @@
     }
     @keyframes pan{ from{background-position:0% 0%} to{background-position:100% 100%} }
 
-    /* Floating glassy blobs */
     .blob{
       position:fixed; border-radius:50%; filter:blur(40px); opacity:.35; z-index:-2;
       background:conic-gradient(from 0deg, #fff0, #fff3 40%, #fff0 70%);
@@ -64,7 +62,6 @@
 
     main{ max-width:1100px; margin:0 auto; padding:10px 20px 80px;}
 
-    /* Hero card */
     .hero{
       background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.65));
       backdrop-filter: blur(10px);
@@ -83,11 +80,9 @@
     }
     .hero .stat{ display:flex; gap:16px; align-items:center; color:#fff; margin-top:10px; opacity:.95 }
 
-    /* Sections */
     section{ margin-top:48px }
     h3{ margin:0 0 16px; font-size:clamp(20px,2.6vw,28px) }
 
-    /* Cards */
     .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
     .col-6{ grid-column: span 6 }
     .col-4{ grid-column: span 4 }
@@ -112,13 +107,12 @@
       padding:8px 12px; border-radius:10px; box-shadow: var(--glow) }
     .link.ghost{ background:#ffffff12; color:#fff; border:1px solid #ffffff44 }
 
+    /* footer styles can stay; no footer is rendered */
     footer{ margin-top:48px; color:#cbd5e1; font-size:14px; text-align:center }
 
-    /* Reveal on scroll */
     .reveal{ opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease }
     .reveal.visible{ opacity:1; transform:none }
 
-    /* Dark-mode switch styles */
     .switch{ display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700 }
     .toggle{ width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80; }
     .knob{ position:absolute; top:2px; left:2px; width:22px; height:22px; background:#fff; border-radius:50%; transition:left .2s }
@@ -157,7 +151,6 @@
         <div class="kicker">Available for remote consulting</div>
         <h2>Automation & Cloud Ops with <span class="type" id="type"></span></h2>
         <p>I build lean tools that turn logs into answers: ARG cost snapshots, Citrix usage analytics, and ESXi power controls—with clean web views and alerts.</p>
-        <!-- Updated CTA -->
         <a class="cta" href="#contact">Contact Me ↓</a>
         <div class="stat">⚡ <strong style="margin-left:6px">Fast to deploy:</strong>&nbsp; drop-in scripts, portable GUIs, and zero-friction setups.</div>
       </div>
@@ -175,8 +168,7 @@
       </div>
     </section>
 
-    <!-- Removed the Projects section -->
-
+    <!-- About -->
     <section class="reveal">
       <h3>About</h3>
       <div class="card">
@@ -185,22 +177,22 @@
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="reveal">
       <h3>Contact</h3>
       <div class="card">
         <p>Email: <a href="mailto:you@example.com">you@example.com</a> · GitHub: <a href="https://github.com/your-username">your-username</a> · LinkedIn: <a href="https://www.linkedin.com/in/your-handle/">your-handle</a></p>
       </div>
-      <footer>
-        <p>© <span id="year"></span> Ramanan Siva · Built with vanilla HTML/CSS/JS · Hosted on GitHub Pages</p>
-      </footer>
+      <!-- Footer removed as requested -->
     </section>
   </main>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Year (guarded; no footer now)
+    const yr = document.getElementById('year');
+    if (yr) yr.textContent = new Date().getFullYear();
 
-    // Typewriter words
+    // Typewriter
     const words = ["PowerShell", "Citrix", "Azure", "VMware", "Python"];
     const el = document.getElementById('type');
     let i=0, j=0, deleting=false;
@@ -225,26 +217,9 @@
       if(observer) observer.observe(el); else el.classList.add('visible');
     });
 
-    // Tilt effect (safe even if no .tilt elements)
-    document.querySelectorAll('.tilt').forEach(card=>{
-      let rAF = null;
-      function onMove(e){
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - .5;
-        const y = (e.clientY - rect.top) / rect.height - .5;
-        if(rAF) cancelAnimationFrame(rAF);
-        rAF = requestAnimationFrame(()=> {
-          card.style.transform = `rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg) translateY(-4px)`;
-        });
-      }
-      function reset(){ card.style.transform='translateY(-4px)'; }
-      card.addEventListener('mousemove', onMove);
-      card.addEventListener('mouseleave', reset);
-    });
-
     // Dark mode toggle (persist)
     const toggle = document.getElementById('themeToggle');
-    const pref = localStorage.getItem('theme'); // 'light' | 'dark' | null
+    const pref = localStorage.getItem('theme');
     function apply(theme){
       if(theme==='dark'){ document.documentElement.style.colorScheme='dark'; toggle.classList.add('on'); }
       else if(theme==='light'){ document.documentElement.style.colorScheme='light'; toggle.classList.remove('on'); }
