@@ -19,6 +19,7 @@
     html,body{height:100%}
     body{ margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--fg); background:var(--bg); overflow-x:hidden; }
 
+    /* Animated gradient background */
     .bg-anim{
       position:fixed; inset:0; z-index:-3; filter:saturate(120%);
       background: radial-gradient(1200px 600px at 10% -10%, #a78bfa55, transparent 60%),
@@ -30,6 +31,7 @@
     }
     @keyframes pan{ from{background-position:0% 0%} to{background-position:100% 100%} }
 
+    /* Floating glassy blobs */
     .blob{
       position:fixed; border-radius:50%; filter:blur(40px); opacity:.35; z-index:-2;
       background:conic-gradient(from 0deg, #fff0, #fff3 40%, #fff0 70%);
@@ -137,7 +139,8 @@
       </div>
     </div>
     <div class="controls">
-      <a class="btn" href="mailto:you@example.com">Contact</a>
+      <!-- Updated to your email -->
+      <a class="btn" href="mailto:sivaramanan@gmail.com">Contact</a>
       <label class="switch" title="Toggle dark mode">
         <span>Theme</span>
         <div class="toggle" id="themeToggle"><div class="knob"></div></div>
@@ -181,17 +184,13 @@
     <section id="contact" class="reveal">
       <h3>Contact</h3>
       <div class="card">
-        <p>Email: <a href="mailto:you@example.com">you@example.com</a> · GitHub: <a href="https://github.com/your-username">your-username</a> · LinkedIn: <a href="https://www.linkedin.com/in/your-handle/">your-handle</a></p>
+        <!-- GitHub link removed; LinkedIn + email kept -->
+        <p>Email: <a href="mailto:sivaramanan@gmail.com">sivaramanan@gmail.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/sivaramanan-sivalingam-85031b241/">sivaramanan-sivalingam-85031b241</a></p>
       </div>
-      <!-- Footer removed as requested -->
     </section>
   </main>
 
   <script>
-    // Year (guarded; no footer now)
-    const yr = document.getElementById('year');
-    if (yr) yr.textContent = new Date().getFullYear();
-
     // Typewriter
     const words = ["PowerShell", "Citrix", "Azure", "VMware", "Python"];
     const el = document.getElementById('type');
