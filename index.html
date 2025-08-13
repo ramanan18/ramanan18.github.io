@@ -96,4 +96,240 @@
       font-weight:700; text-decoration:none; box-shadow: var(--glow);
     }
     .hero .stat{
-      display:flex; gap:16px; align-items:center; c
+      display:flex; gap:16px; align-items:center; color:#fff; margin-top:10px; opacity:.95
+    }
+
+    /* Sections */
+    section{ margin-top:48px }
+    h3{ margin:0 0 16px; font-size:clamp(20px,2.6vw,28px) }
+
+    /* Cards */
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .col-6{ grid-column: span 6 }
+    .col-4{ grid-column: span 4 }
+    .col-12{ grid-column: span 12 }
+    @media (max-width:900px){ .col-6,.col-4{ grid-column: span 12 } }
+
+    .card{
+      background:var(--card); border:1px solid #ffffff30;
+      border-radius:16px; padding:18px;
+      box-shadow: 0 8px 24px rgba(2,6,23,.15);
+      transition: transform .2s ease, box-shadow .2s ease;
+      will-change: transform;
+    }
+    .card:hover{ transform: translateY(-4px) scale(1.01); box-shadow:0 16px 40px rgba(2,6,23,.22) }
+    .card h4{ margin:0 0 8px; font-size:18px }
+    .card p{ margin:0 0 10px; color:var(--muted) }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px }
+    .tag{ font-size:12px; padding:6px 10px; background:#00000008; border-radius:999px; border:1px solid #00000015 }
+
+    .links{display:flex; gap:10px; margin-top:10px}
+    .link{ color:#fff; text-decoration:none; font-weight:700; background: linear-gradient(90deg,#818cf8,#22d3ee);
+      padding:8px 12px; border-radius:10px; box-shadow: var(--glow) }
+    .link.ghost{ background:#ffffff12; color:#fff; border:1px solid #ffffff44 }
+
+    footer{
+      margin-top:48px; color:#cbd5e1; font-size:14px;
+      text-align:center
+    }
+
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease }
+    .reveal.visible{ opacity:1; transform:none }
+
+    /* Dark-mode switch styles */
+    .switch{
+      display:inline-flex; align-items:center; gap:8px; color:#fff; font-weight:700
+    }
+    .toggle{
+      width:44px; height:26px; border-radius:26px; background:#ffffff40; position:relative; border:1px solid #ffffff80;
+    }
+    .knob{ position:absolute; top:2px; left:2px; width:22px; height:22px; background:#fff; border-radius:50%; transition:left .2s }
+    .toggle.on .knob{ left:20px }
+
+    /* Make sure links are legible on bright bg */
+    a{ color:var(--accent) }
+  </style>
+</head>
+<body>
+  <div class="bg-anim"></div>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <header>
+    <div class="brand">
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/1?v=4" alt="Avatar"
+           onerror="this.src='https://avatars.githubusercontent.com/u/9919?v=4'">
+      <div class="title">
+        <h1>Ramanan Siva</h1>
+        <p>Systems Engineer — Azure • Citrix • VMware • PowerShell</p>
+      </div>
+    </div>
+    <div class="controls">
+      <a class="btn" href="mailto:you@example.com">Contact</a>
+      <label class="switch" title="Toggle dark mode">
+        <span>Theme</span>
+        <div class="toggle" id="themeToggle"><div class="knob"></div></div>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero reveal">
+      <div>
+        <div class="kicker">Available for remote consulting</div>
+        <h2>Automation & Cloud Ops with <span class="type" id="type"></span></h2>
+        <p>I build lean tools that turn logs into answers: ARG cost snapshots, Citrix usage analytics, and ESXi power controls—with clean web views and alerts.</p>
+        <a class="cta" href="#projects">See Projects ↓</a>
+        <div class="stat">⚡ <strong style="margin-left:6px">Fast to deploy:</strong>&nbsp; drop-in scripts, portable GUIs, and zero-friction setups.</div>
+      </div>
+      <div class="card" style="background:#0f172a; color:#e2e8f0; border-color:#ffffff22">
+        <h4 style="margin:0 0 8px">What I’m great at</h4>
+        <ul style="margin:0 0 10px 18px; padding:0; line-height:1.8">
+          <li>Azure Resource Graph reporting (cost, inventory)</li>
+          <li>Citrix Delivery Group analytics (24h activity/idle)</li>
+          <li>PowerShell → HTML dashboards & CSV pipelines</li>
+          <li>VMware/ESXi shutdown & reboot tooling (PS + Python)</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Azure</span><span class="tag">Citrix</span><span class="tag">VMware</span><span class="tag">PowerShell</span><span class="tag">Python</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h3>Projects</h3>
+      <div class="grid">
+        <article class="card col-6 tilt">
+          <h4>Citrix & Azure Tooling Suite</h4>
+          <p>Delivery Group usage reporting, last-24h activity/idle analysis, StoreFront tweaks, ARG cost snapshots, and CSV→HTML web views.</p>
+          <div class="tags">
+            <span class="tag">PowerShell</span><span class="tag">ARG</span><span class="tag">OData</span><span class="tag">Bootstrap</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://github.com/your-username/citrix-azure-tooling">Repo</a>
+            <a class="link ghost" href="#">Live Demo</a>
+          </div>
+        </article>
+
+        <article class="card col-6 tilt">
+          <h4>VMware/ESXi Power Tools</h4>
+          <p>GUI for VM/host shutdown & reboot (manual/scheduled), HTML emails; Python variant with packaging.</p>
+          <div class="tags">
+            <span class="tag">PowerCLI</span><span class="tag">WinForms/WPF</span><span class="tag">Python</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://github.com/your-username/esxi-power-tools">Repo</a>
+          </div>
+        </article>
+
+        <article class="card col-4 tilt">
+          <h4>Retail/Restaurant POS (HTML receipt)</h4>
+          <p>Touch-friendly dashboard, auto PDF/print, Twilio SMS, daily reports.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Twilio</span></div>
+          <div class="links"><a class="link" href="https://github.com/your-username/restaurant-pos">Repo</a></div>
+        </article>
+
+        <article class="card col-4 tilt">
+          <h4>SMS Marketing Portal</h4>
+          <p>Groups, templates, charts, CSV import/export.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">Bootstrap</span></div>
+          <div class="links"><a class="link" href="https://github.com/your-username/sms-portal">Repo</a></div>
+        </article>
+
+        <article class="card col-4 tilt">
+          <h4>Prescription Refill Dashboard</h4>
+          <p>Weekly SMS reminders, reply capture, ready/pickup flow.</p>
+          <div class="tags"><span class="tag">Express</span><span class="tag">MongoDB</span></div>
+          <div class="links"><a class="link" href="https://github.com/your-username/refill-dashboard">Repo</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h3>About</h3>
+      <div class="card">
+        <p>15+ years across Azure, Citrix, and VMware. I like turning rough CSVs and logs into clean dashboards and automations you can trust.</p>
+        <p><strong>Tech:</strong> PowerShell, Python, Node, ARG, Citrix Cloud APIs, PowerCLI, MongoDB.</p>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h3>Contact</h3>
+      <div class="card">
+        <p>Email: <a href="mailto:you@example.com">you@example.com</a> · GitHub: <a href="https://github.com/your-username">your-username</a> · LinkedIn: <a href="https://www.linkedin.com/in/your-handle/">your-handle</a></p>
+      </div>
+      <footer>
+        <p>© <span id="year"></span> Ramanan Siva · Built with vanilla HTML/CSS/JS · Hosted on GitHub Pages</p>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typewriter words
+    const words = ["PowerShell", "Citrix", "Azure", "VMware", "Python"];
+    const el = document.getElementById('type');
+    let i=0, j=0, deleting=false;
+    function type(){
+      const word = words[i % words.length];
+      el.textContent = deleting ? word.slice(0, j--) : word.slice(0, j++);
+      if(!deleting && j === word.length + 3){ deleting = true; }
+      if(deleting && j === 0){ deleting = false; i++; }
+      setTimeout(type, deleting ? 70 : 110);
+    }
+    type();
+
+    // Scroll reveal
+    const observer = ('IntersectionObserver' in window) ? new IntersectionObserver(entries=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          e.target.classList.add('visible'); observer.unobserve(e.target);
+        }
+      }
+    },{threshold:.1}) : null;
+    document.querySelectorAll('.reveal').forEach(el=>{
+      if(observer) observer.observe(el); else el.classList.add('visible');
+    });
+
+    // Tilt effect on cards
+    document.querySelectorAll('.tilt').forEach(card=>{
+      let rAF = null;
+      function onMove(e){
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - .5;
+        const y = (e.clientY - rect.top) / rect.height - .5;
+        if(rAF) cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(()=> {
+          card.style.transform = `rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg) translateY(-4px)`;
+        });
+      }
+      function reset(){ card.style.transform='translateY(-4px)'; }
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', reset);
+    });
+
+    // Dark mode toggle (persist)
+    const toggle = document.getElementById('themeToggle');
+    const pref = localStorage.getItem('theme'); // 'light' | 'dark' | null
+    function apply(theme){
+      if(theme==='dark'){ document.documentElement.style.colorScheme='dark'; toggle.classList.add('on'); }
+      else if(theme==='light'){ document.documentElement.style.colorScheme='light'; toggle.classList.remove('on'); }
+      else { document.documentElement.style.colorScheme='normal'; toggle.classList.remove('on'); }
+      localStorage.setItem('theme', theme || '');
+    }
+    if(pref){ apply(pref); }
+    toggle.addEventListener('click', ()=>{
+      const current = localStorage.getItem('theme');
+      const next = current==='dark' ? 'light' : 'dark';
+      apply(next);
+    });
+  </script>
+</body>
+</html>
